@@ -25,8 +25,28 @@ body {
 }
 
 .products {
-  padding-left: 1.2rem;
+  text-align: center;
 }
+
+.product-list {
+  padding: 0;
+  list-style: none;
+}
+
+.schedule {
+  text-align: center;
+}
+
+.operational {
+  padding: 0;
+  list-style: none;
+}
+
+.lokasi {
+  text-align: center;
+  margin-top: 32px;
+}
+
 
 button {
   padding: 12px 18px;

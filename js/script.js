@@ -1,6 +1,6 @@
 const promoButton = document.querySelector("#promoButton");
 
 promoButton.addEventListener("click", () => {
-  promoButton.textContent = "Promo: Beli 2 gratis tester!";
-  console.log("Promo Toko Buku Nusa berhasil ditampilkan.");
+  promoButton.textContent = "Beli 10 gratis 1";
+  console.log("Selamat, Anda mendapatkan promo beli 10 gratis 1");
 });
