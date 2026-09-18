@@ -14,7 +14,7 @@ body {
 .hero {
   padding: 36px;
   color: white;
-  background: #6f3b1f;
+  background: #21c7c1;
   border-radius: 24px;
 }
 
@@ -33,18 +33,18 @@ body {
   list-style: none;
 }
 
-.schedule {
-  text-align: center;
+.kontak-title {
+  margin-top: 32px;
 }
 
-.operational {
-  padding: 0;
-  list-style: none;
-}
-
-.lokasi {
+.kontak {
   text-align: center;
   margin-top: 32px;
+}
+
+.kontak-list {
+  padding: 0;
+  list-style: none;
 }
 
 
@@ -57,3 +57,70 @@ button {
   border: 0;
   border-radius: 999px;
 }
+
+.skip-link {
+  position: absolute;
+  left: -9999px; 
+  padding: 8px 12px; 
+  color: white; 
+  background: #2f2118; 
+}
+
+.skip-link:focus { 
+  top: 8px; 
+  left: 8px; 
+}
+
+.site-header {
+  padding: 16px 20px; 
+  background: white; 
+  border-bottom: 1px solid #dccbbc; 
+}
+
+.nav {
+  max-width: 920px; 
+  margin: 0 auto; 
+}
+
+.brand {
+  display: inline-block; 
+  margin-bottom: 8px; 
+  color: #4b2715; 
+  font-weight: 800; 
+  text-decoration: none; 
+}
+
+.nav ul {
+  padding: 0; 
+  margin: 0; 
+  list-style: none;
+}
+
+.nav li { 
+  display: inline-block; 
+  margin-right: 12px; 
+}
+
+.nav a[aria-current="page"] { 
+  font-weight: 800; 
+}
+
+a:focus-visible,
+button:focus-visible { 
+  outline: 3px solid #2563eb; 
+  outline-offset: 3px; 
+}
+
+a:-webkit-any-link {
+    color: -webkit-link;
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.site-footer { 
+  padding: 24px 20px; 
+  color: white; 
+  text-align: center; 
+  background: #29b7c1; 
+}
+
