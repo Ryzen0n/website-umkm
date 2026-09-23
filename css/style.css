@@ -58,6 +58,8 @@ button {
   border-radius: 999px;
 }
 
+/*P02*/
+
 .skip-link {
   position: absolute;
   left: -9999px; 
@@ -124,3 +126,67 @@ a:-webkit-any-link {
   background: #29b7c1; 
 }
 
+/*P03*/
+
+img { 
+  max-width: 100%; 
+  height: auto; 
+}
+figure {
+    display: block;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 40px;
+    margin-inline-end: 40px;
+    unicode-bidi: isolate;
+}
+figcaption { 
+  margin-top: 8px; 
+  color: #6b5b52; 
+}
+.product-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.25rem;
+    width: 100%;
+}
+.product-card {
+    margin: 0;
+    padding: 10px;
+    overflow: hidden;
+    border: 2px solid #dccbbc;
+    border-radius: 12px;
+    text-align: center;
+    box-sizing: border-box;
+}
+.gallery-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.25rem;
+    width: 100%;
+}
+.media-card {
+    margin: 0;
+    padding: 10px;
+    overflow: hidden;
+    border: 2px solid #dccbbc;
+    border-radius: 12px;
+    text-align: center;
+    box-sizing: border-box;
+}
+
+table { 
+  width: 100%; 
+  border-collapse: collapse; 
+}
+caption { 
+  margin-bottom: 8px; 
+  font-weight: 700; 
+  text-align: left; 
+}
+th,
+td { 
+  padding: 10px; 
+  text-align: left; 
+  border: 1px solid #dccbbc; 
+}
