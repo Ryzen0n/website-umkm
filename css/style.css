@@ -53,7 +53,7 @@ button {
   color: #2f2118;
   font-weight: 700;
   cursor: pointer;
-  background: #ffd166;
+  background: #bacc45;
   border: 0;
   border-radius: 999px;
 }
@@ -189,4 +189,72 @@ td {
   padding: 10px; 
   text-align: left; 
   border: 1px solid #dccbbc; 
+}
+
+/*P04*/
+#konten > p { 
+  max-width: 600px;
+}
+
+#konten > h1{
+  max-width: 600px;
+}
+
+#form-kontak { 
+  max-width: 800px; 
+  padding: 16px;  
+  border: 1px solid #dccbbc;
+  border-radius: 12px;
+  background: white;
+
+}
+
+#form-kontak .field { 
+  margin-bottom: 16px; 
+}
+#form-kontak label { 
+  display: block; 
+  margin: 0 0 6px; 
+}
+#form-kontak fieldset {
+  margin: 0 0 16px;
+  padding: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+#form-kontak fieldset label { 
+  display: inline-flex; 
+  align-items: center; 
+}
+#form-kontak input[type="radio"] { 
+  margin-right: 6px;
+}
+
+#form-kontak input[type="text"],
+#form-kontak input[type="email"],
+#form-kontak input[type="tel"],
+#form-kontak input[type="date"],
+#form-kontak select,
+#form-kontak textarea {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 9px;
+  border: 1px solid #bbb;
+  border-radius: 5px;
+  font: inherit;
+}
+
+#preview-title { 
+  margin-top: 32px; 
+  font-size: 1.25rem; 
+  font-weight: 700; 
+  text-align: center;
+}
+#preview-form { 
+  max-width: 800px;
+  padding: 16px; 
+  white-space: pre-wrap; 
+  background: white; 
+  border: 1px solid #dccbbc; 
+  border-radius: 12px;
 }
