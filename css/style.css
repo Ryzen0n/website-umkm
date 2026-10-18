@@ -5,6 +5,7 @@
   --color-text: #333333;
   --color-muted: #666666;
   --color-surface: #ffffff;
+  --color-surface-soft: #ffe0d5;
   --color-border: #ccc;
   --color-focus: #ffb74d;
   --space-1: 6px;
@@ -23,14 +24,15 @@
 body {
   margin: 0;
   color: var(--color-text);
-  background: var(--color-surface);
+  background: var(--color-surface-soft);
   font-family: Arial, sans-serif;
   font-size: 1rem;
   line-height: 1.6;
+  scroll-padding-top: 10rem;
 }
 
 h1 {
-    font-size: 1.75rem;
+    font-size: clamp(1.5rem, 4vw, 2rem);
     line-height: 1.1;
 }
 
@@ -52,12 +54,17 @@ p {
 ul {
     font-size: 0.95rem;
     line-height: 1.5;
+    padding-left: 1.25rem;
 }
 
 .page {
   max-width: 920px;
   margin: 0 auto;
-  padding: 32px 20px;
+  padding: var(--space-4) clamp(var(--space-3), 5vw, var(--space-4));
+}
+
+.page p {
+  max-width: 65ch;
 }
 
 .hero {
@@ -69,7 +76,7 @@ ul {
 
 .hero {
   display: grid;
-  grid-template-columns: 1.2fr 0.8fr;
+  grid-template-columns: 1fr;
   gap: var(--space-4);
   align-items: center;
 }
@@ -78,8 +85,9 @@ ul {
   border-radius: var(--radius-md); 
 }
 
-.gallery-grid { 
-  grid-template-columns: repeat(2, minmax(0, 1fr)); 
+.hero-content {
+  margin: 0;
+  font-size: clamp(1rem, 2vw, 1.25rem);
 }
 
 .eyebrow {
@@ -90,7 +98,11 @@ ul {
 }
 
 .products {
+  padding: var(--space-1);
   text-align: center;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
 }
 
 .product-list {
@@ -98,13 +110,10 @@ ul {
   list-style: none;
 }
 
-.kontak-title {
-  margin-top: 32px;
-}
 
 .kontak {
   text-align: center;
-  margin-top: 32px;
+
 }
 
 .kontak-list {
@@ -144,36 +153,43 @@ button {
 }
 
 .site-header {
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-  padding: 16px 20px; 
+  padding: var(--space-2) clamp(var(--space-3), 5vw, var(--space-4)); 
   background: var(--color-surface); 
   border-bottom: 1px solid var(--color-border); 
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: var(--space-3);
+  position: static;
 }
 
 .logo {
   display: block;
   width: 100%;
-  height: 80px;
+  height: 60px;
   border-radius: 100%;
   object-fit: cover;
 }
 
 .nav {
-  align-items: center;
   display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  align-items: center;
+}
+.nav ul {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-2);
   flex-wrap: wrap;
-  gap: var(--space-3);
+  list-style: none;
+  padding: 0;
+}
+
+.nav li { 
+  margin-right: var(--space-2); 
 }
 
 .brand {
-  display: inline-block; 
+  display: inline-flex; 
   margin-bottom: 0; 
+  align-items: center;
   color: var(--color-primary-strong); 
   font-weight: 800; 
   font-size: 12px;
@@ -181,7 +197,12 @@ button {
 }
 
 .nav a[aria-current="page"] { 
-  font-weight: 800; 
+  font-weight: 400; 
+  background: var(--color-primary);
+  color: var(--color-surface);
+  border-radius: var(--radius-sm);
+  padding: var(--space-1) var(--space-2);
+  text-decoration: none;
 }
 
 a:focus-visible,
@@ -196,21 +217,46 @@ textarea:focus-visible {
 .nav a {
     color: var(--color-primary);
     cursor: pointer;
-    text-decoration: underline;
+    text-decoration: none;
+}
+
+a:hover {
+    color: var(--color-primary-strong);
 }
 
 .site-footer { 
-  padding: 24px 20px; 
+  padding: var(--space-2) var(--space-3); 
   color: var(--color-surface); 
   text-align: center; 
   background: var(--color-primary); 
 }
 
-/*P03*/
+.tentang {
+  padding: var(--space-4);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+}
 
-img { 
-  max-width: 100%; 
-  height: auto; 
+section{
+  margin-top: var(--space-2);
+  background: var(--color-surface);
+  padding: var(--space-4);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+}
+
+/*P03*/
+audio {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
 }
 figure {
     display: block;
@@ -262,22 +308,13 @@ caption {
 }
 th,
 td { 
-  padding: var(--space-3); 
+  padding: var(--space-2); 
   text-align: left; 
   border: 1px solid var(--color-border); 
 }
 
 /*P04*/
-#konten > p { 
-  max-width: 600px;
-}
-
-#konten > h1{
-  max-width: 600px;
-}
-
-#form-kontak { 
-  max-width: 800px; 
+#form-kontak {  
   padding: var(--space-3);  
   border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
@@ -342,7 +379,6 @@ td {
   text-align: center;
 }
 #preview-form { 
-  max-width: 800px;
   padding: var(--space-3); 
   white-space: pre-wrap; 
   background: var(--color-surface); 
@@ -353,7 +389,9 @@ td {
 /*P06*/
 
 .product-badge {
-  position:absolute;;
+  position:absolute;
+  top: var(--space-3);
+  left: var(--space-3);
   align-self: flex-start;
   padding: 0.25rem var(--space-2);
   color: var(--color-primary-strong);
@@ -379,7 +417,7 @@ td {
 .product-grid,
 .gallery-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns:1fr;
   gap: var(--space-3);
 }
 
@@ -436,4 +474,53 @@ td {
 
 .form-actions button {
     margin-top: 0;
+}
+
+/*P07*/
+.table-scroll { 
+  max-width: 100%; 
+  overflow-x: auto; 
+}
+
+.table-scroll:focus-visible { 
+  outline: 3px solid var(--color-focus); 
+  outline-offset: 3px; 
+}
+
+.table-scroll table { 
+  min-width: 4rem; 
+}
+
+.table-wrapper {
+    width: 100%;
+    overflow-x: auto; /* Mencegah overflow tabel di HP */
+}
+
+@media (min-width: 42rem) {
+  .gallery-grid { 
+    grid-template-columns: repeat(2, minmax(0, 1fr)); 
+  }
+}
+
+@media (min-width: 48rem) {
+  .hero { 
+    grid-template-columns: 1.2fr 0.8fr; 
+  }
+  .product-grid { 
+    grid-template-columns: repeat(2, minmax(0, 1fr)); 
+  }
+}
+
+@media (min-width: 60rem) {
+  .site-header {
+      position: sticky;
+    }
+  .nav {
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+    }
+  .product-grid { 
+    grid-template-columns: repeat(3, minmax(0, 1fr)); 
+  }
 }
