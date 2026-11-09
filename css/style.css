@@ -662,3 +662,23 @@ td {
   margin-top: var(--space-2);
   margin-bottom: 0;
 }
+
+/* P10: Refactor Output & Produk Unggulan */
+.category-note {
+  font-size: 0.85rem;
+  color: var(--color-muted);
+  margin-top: 0;
+  margin-bottom: var(--space-2);
+}
+
+#produk-unggulan {
+  font-weight: 700;
+  color: var(--color-primary, #6f3b1f);
+}
+
+#kategori-ringkasan {
+  font-size: 0.95rem;
+  color: var(--color-muted);
+  margin-top: var(--space-1);
+}
+

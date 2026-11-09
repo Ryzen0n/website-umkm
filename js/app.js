@@ -1,55 +1,32 @@
 "use strict";
 
+/**
+ * . Data Produk UMKM
+ */
 const produkUmkm = [
-  {
-    nama: "Arabika Gayo",
-    kategori: "Kopi",
-    harga: 85000,
-    stok: 12,
-    unggulan: true,
-    diskonPersen: 10,
-    deskripsi: "Kopi beraroma floral dan asam segar khas dataran tinggi Gayo.",
-  },
-  {
-    nama: "Robusta Temanggung",
-    kategori: "Kopi",
-    harga: 65000,
-    stok: 4,
-    unggulan: false,
-    diskonPersen: 0,
-    deskripsi: "Rasa cokelat karamel yang pekat dengan body kopi yang mantap.",
-  },
-  {
-    nama: "Paket Seduh Rumahan",
-    kategori: "Bundling",
-    harga: 125000,
-    stok: 0,
-    unggulan: false,
-    diskonPersen: 0,
-    deskripsi: "Paket hemat alat drip praktis dan bubuk kopi untuk kebutuhan seduh harian.",
-  },
-  {
-    nama: "Cold Brew Signature",
-    kategori: "Kopi",
-    harga: 35000,
-    stok: 8,
-    unggulan: true,
-    diskonPersen: 0,
-    deskripsi: "Seduh dingin 12 jam, rasa manis alami, lembut di lambung, dan siap minum.",
-  },
+  { nama: "Arabika Gayo", kategori: "Kopi", harga: 85000, stok: 12, unggulan: true, diskonPersen: 10 },
+  { nama: "Robusta Temanggung", kategori: "Kopi", harga: 65000, stok: 4, unggulan: false },
+  { nama: "Paket Seduh", kategori: "Bundling", harga: 125000, stok: 0, unggulan: false },
+  { nama: "Drip Bag Nusantara", kategori: "Kopi", harga: 45000, stok: 18, unggulan: false },
 ];
 
-console.table(produkUmkm);
+/**
+ Function formatRupiah
+ */
+function formatRupiah(nilai) {
+  return new Intl.NumberFormat("id-ID", {
+    style: "currency",
+    currency: "IDR",
+    maximumFractionDigits: 0,
+  }).format(nilai);
+}
 
-const formatRupiah = new Intl.NumberFormat("id-ID", {
-  style: "currency",
-  currency: "IDR",
-  maximumFractionDigits: 0,
-});
-
+/**
+ * Function statusStok
+ */
 function statusStok(stok) {
-  if (stok === 0) {
-    return { label: "Habis", className: "empty" };
+  if (stok <= 0) {
+    return { label: "Habis", className: "warning" };
   }
 
   if (stok <= 5) {
@@ -59,81 +36,109 @@ function statusStok(stok) {
   return { label: "Tersedia", className: "" };
 }
 
-function labelKategori(kategori) {
-  switch (kategori) {
-    case "Kopi":
-      return "Produk kopi pilihan";
-    case "Bundling":
-      return "Paket hemat";
-    default:
-      return "Produk UMKM";
+/**
+ Function hitungHargaPromo
+ */
+function hitungHargaPromo(produk) {
+  if (
+    typeof produk.diskonPersen === "number" &&
+    produk.diskonPersen > 0 &&
+    produk.diskonPersen <= 100
+  ) {
+    const nominalDiskon = (produk.harga * produk.diskonPersen) / 100;
+    const hargaSetelahDiskon = Math.round(produk.harga - nominalDiskon);
+    return Math.max(0, hargaSetelahDiskon);
   }
+  return produk.harga;
 }
 
-function hitungHargaDiskon(harga, diskonPersen) {
-  if (typeof diskonPersen === "number" && diskonPersen > 0 && diskonPersen <= 100) {
-    const nominalDiskon = (harga * diskonPersen) / 100;
-    const hargaFinal = Math.round(harga - nominalDiskon);
-    return Math.max(0, hargaFinal);
-  }
-  return harga;
+/**Function formatRingkasanKategori
+ */
+function formatRingkasanKategori(daftarProduk) {
+  const hitungan = daftarProduk.reduce((akumulator, produk) => {
+    akumulator[produk.kategori] = (akumulator[produk.kategori] || 0) + 1;
+    return akumulator;
+  }, {});
+
+  return Object.entries(hitungan)
+    .map(([kategori, jumlah]) => `${kategori}: ${jumlah} produk`)
+    .join(", ");
 }
+
+/**
+ * 5. Function buatKartuProduk
+ */
+function buatKartuProduk(produk) {
+  const status = statusStok(produk.stok);
+  const hargaFinal = hitungHargaPromo(produk);
+
+  let hargaMarkup = "";
+  if (produk.diskonPersen && produk.diskonPersen > 0) {
+    hargaMarkup = `
+      <p class="price">
+        <span class="price-promo">${formatRupiah(hargaFinal)}</span>
+        <del class="price-original">${formatRupiah(produk.harga)}</del>
+        <span class="discount-badge">-${produk.diskonPersen}%</span>
+      </p>
+    `;
+  } else {
+    hargaMarkup = `<p class="price">${formatRupiah(produk.harga)}</p>`;
+  }
+
+  return `
+    <article class="js-product-card">
+      <h3>${produk.nama}</h3>
+      <p class="category-note">${produk.kategori}</p>
+      ${hargaMarkup}
+      <span class="stock-badge ${status.className}">${status.label}</span>
+    </article>
+  `;
+}
+
+/**
+ *  Debugging terarah menggunakan forEach sebelum render
+ */
+produkUmkm.forEach((produk) => {
+  console.log("Debug produk:", produk.nama, "stok:", produk.stok);
+});
+
+/**
+ *  Function renderProduk
+ */
 function renderProduk() {
   const grid = document.querySelector("#produk-dinamis");
   const ringkasan = document.querySelector("#produk-ringkasan");
+  const unggulan = document.querySelector("#produk-unggulan");
+  const kategoriEl = document.querySelector("#kategori-ringkasan");
 
-  if (!grid || !ringkasan) {
+  if (!grid || !ringkasan || !unggulan) {
+    console.warn("Target render produk belum lengkap.");
     return;
   }
 
-  let jumlahTersedia = 0;
-  let markup = "";
+  // Array method: filter (mengambil hanya produk dengan stok > 0)
+  const produkTersedia = produkUmkm.filter((produk) => produk.stok > 0);
 
-  for (const produk of produkUmkm) {
-    const status = statusStok(produk.stok);
-    const kategori = labelKategori(produk.kategori);
+  // Array method: find (mengambil satu produk unggulan pertama)
+  const produkUnggulan = produkUmkm.find((produk) => produk.unggulan === true);
 
-    const labelAksi = produk.stok > 0 ? "Siap dipesan" : "Hubungi admin";
+  // Array method: map (mengonversi setiap produk menjadi string HTML) & join("")
+  const markupProduk = produkTersedia.map(buatKartuProduk).join("");
 
-    const badgeUnggulanMarkup = produk.unggulan
-      ? `<span class="featured-badge">Produk Unggulan</span>`
-      : "";
+  // Update DOM
+  grid.innerHTML = markupProduk;
+  ringkasan.textContent = `${produkTersedia.length} produk tersedia dari ${produkUmkm.length} data.`;
+  unggulan.textContent = produkUnggulan
+    ? `Produk unggulan: ${produkUnggulan.nama}`
+    : "Belum ada produk unggulan.";
 
-    let hargaMarkup = "";
-    if (produk.diskonPersen && produk.diskonPersen > 0) {
-      const hargaPromo = hitungHargaDiskon(produk.harga, produk.diskonPersen);
-      hargaMarkup = `
-        <p class="price">
-          <span class="price-promo">${formatRupiah.format(hargaPromo)}</span>
-          <del class="price-original">${formatRupiah.format(produk.harga)}</del>
-          <span class="discount-badge">-${produk.diskonPersen}%</span>
-        </p>
-      `;
-    } else {
-      hargaMarkup = `<p class="price">${formatRupiah.format(produk.harga)}</p>`;
-    }
-
-    if (produk.stok > 0) {
-      jumlahTersedia = jumlahTersedia + 1;
-    }
-
-    markup = markup + `
-      <article class="js-product-card">
-        ${badgeUnggulanMarkup}
-        <h3>${produk.nama}</h3>
-        <p class="product-category">${kategori}</p>
-        <p class="product-desc">${produk.deskripsi}</p>
-        ${hargaMarkup}
-        <div>
-          <span class="stock-badge ${status.className}">${status.label}</span>
-        </div>
-        <p class="card-action">${labelAksi}</p>
-      </article>
-    `;
+  if (kategoriEl) {
+    kategoriEl.textContent = `Ringkasan kategori: ${formatRingkasanKategori(produkUmkm)}`;
   }
 
-  grid.innerHTML = markup;
-  ringkasan.textContent = `${jumlahTersedia} produk tersedia dari ${produkUmkm.length} data lokal.`;
+  // Debugging log & table
+  console.log("Ringkasan kategori:", formatRingkasanKategori(produkUmkm));
+  console.table(produkUmkm);
 }
 
 document.addEventListener("DOMContentLoaded", renderProduk);
