@@ -682,3 +682,116 @@ td {
   margin-top: var(--space-1);
 }
 
+/* P11: Filter Bar, Active State, Empty State & Dynamic Cards */
+.product-section .eyebrow {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--color-primary);
+}
+
+.produk-status {
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.filter-section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-block: 1rem 1.5rem;
+}
+
+.filter-group {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 0.75rem;
+}
+
+.filter-label {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--color-muted, #64748b);
+  min-width: 4.5rem;
+}
+
+.filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.filter-button {
+  border: 1px solid var(--color-border, #cbd5e1);
+  border-radius: 999px;
+  background: var(--color-surface, #ffffff);
+  color: var(--color-text, #1f2937);
+  padding: 0.65rem 1rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.filter-button:hover,
+.filter-button:focus-visible {
+  border-color: var(--color-primary, #8c533e);
+  outline: 3px solid rgb(140 83 62 / 20%);
+  outline-offset: 2px;
+}
+
+.filter-button.is-active {
+  background: var(--color-primary, #8c533e);
+  border-color: var(--color-primary, #8c533e);
+  color: var(--color-surface, #ffffff);
+}
+
+#produk-grid .empty-state {
+  grid-column: 1 / -1;
+  max-width: none;
+  margin: 0;
+  border: 1px dashed var(--color-border, #94a3b8);
+  border-radius: var(--radius-lg, 1rem);
+  padding: 1rem;
+  background: var(--color-surface, #ffffff);
+  color: var(--color-muted, #64748b);
+  text-align: center;
+}
+
+#produk-grid .product-card h3 {
+  margin-top: 0;
+  margin-bottom: var(--space-1);
+  padding: 0;
+}
+
+#produk-grid .product-card .price {
+  margin-block: var(--space-1) var(--space-2);
+  font-weight: 700;
+}
+
+#produk-grid .stock-badge {
+  align-self: center;
+  margin-block-end: var(--space-3);
+}
+
+.ghost-button {
+  margin-top: auto;
+  align-self: center;
+  padding: 0.45rem 0.95rem;
+  border: 1px solid var(--color-border, #ccc);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--color-muted, #666666);
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.ghost-button:hover,
+.ghost-button:focus-visible {
+  border-color: var(--color-primary, #8c533e);
+  color: var(--color-primary-strong, #4a2c2a);
+  background: var(--color-surface-soft, #ffe0d5);
+}
+
+
+
+
